@@ -1,0 +1,28 @@
+node:
+  log_driver: ''
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  log_opt: {}
+  image: node:6.2
+  links:
+  - mongo:restdb
+  volumes:
+  - ${app_volume}:/app
+  stdin_open: true
+loadBalancer:
+  ports:
+  - ${listener_port}:3000
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - node:node
+  stdin_open: true
+mongo:
+  log_driver: ''
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  log_opt: {}
+  image: mongo:3.3
+  stdin_open: true

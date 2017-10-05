@@ -1,0 +1,32 @@
+.catalog:
+  name: "MEAN"
+  version: "latest"
+  description: "MEAN Stack - Mongo, Express, Angular, Node"
+  uuid: MEAN-0
+  questions:
+    - variable: "listener_port"
+      type: "int"
+      default: 3000
+      label: "Application Port"
+      description: |
+        Enter the port to reach your application.
+    - variable: "app_volume"
+      type: "string"
+      default: /vagrant/MEAN/app
+      label: "Application Directory"
+      description: |
+        Enter the directory to reach your application
+node:
+  scale: 1
+loadBalancer:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+mongo:
+  scale: 1
